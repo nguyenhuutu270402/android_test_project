@@ -1,30 +1,38 @@
 package com.example.myapplication
 
-import android.graphics.Color
+import android.animation.ValueAnimator
 import android.os.Bundle
-import android.widget.ProgressBar
-import android.widget.TextView
+import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
+import com.example.myapplication.arcprogress.ArcProgress
+
 
 class MainActivity2 : AppCompatActivity() {
-    private lateinit var progressBar: ProgressBar
-    private lateinit var tvProgress: TextView
+
+    private var currentProgress = 50 // Initial value of ArcProgress
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main2)
 
-        progressBar = findViewById(R.id.progress_bar)
-        tvProgress = findViewById(R.id.tvProgress)
+        val btnStart = findViewById<Button>(R.id.btnStart)
+        val progress = findViewById<ArcProgress>(R.id.arc_progress)
 
-        val maxProgress = 300
-        val currentProgress = 50
+        btnStart.setOnClickListener {
+            val newProgress = (Math.random() * 100).toFloat()
 
-        progressBar.max = maxProgress
-        progressBar.progress = currentProgress
-        progressBar.progressDrawable.setTint(Color.parseColor("#03A1FE"))
+            val animator = ValueAnimator.ofInt(currentProgress, newProgress.toInt())
+            animator.duration = 500 // Animation duration in milliseconds
 
-        tvProgress.text = currentProgress.toString()
-        tvProgress.setTextColor(Color.parseColor("#04A0FE"))
+            animator.addUpdateListener { valueAnimator ->
+                val animatedValue = valueAnimator.animatedValue as Int
+                progress.progress = animatedValue.toFloat()
+            }
+
+            animator.start()
+
+            currentProgress = newProgress.toInt()
+        }
     }
 }
+
