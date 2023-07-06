@@ -38,9 +38,9 @@ class MainActivity : AppCompatActivity() {
         textViewCPBLabels[7] = findViewById(R.id.textView100CPB)
         textViewCPBLabels[8] = findViewById(R.id.textView120CPB)
         mCircleProgressBar = findViewById(R.id.my_cpb)
-        mCircleProgressBarShadowHide = findViewById(R.id.my_cpb_shadow_hide)
+//        mCircleProgressBarShadowHide = findViewById(R.id.my_cpb_shadow_hide)
         mCircleProgressBar.max = 165
-        mCircleProgressBarShadowHide.max = 165
+//        mCircleProgressBarShadowHide.max = 165
         mCircleProgressBar.isDrawBackgroundOutsideProgress = true
         mCircleProgressBar.setProgressBackgroundColor(
             ContextCompat.getColor(this@MainActivity, R.color.colorBackground)
@@ -112,13 +112,13 @@ class MainActivity : AppCompatActivity() {
         animatorText.startDelay = 1500
         animatorText.start()
 
-        val animatorValueOnGauge = ValueAnimator.ofInt(0, 121)
+        val animatorValueOnGauge = ValueAnimator.ofInt(50, 2)
         animatorValueOnGauge.addUpdateListener { animation ->
             val progress = animation.animatedValue as Int
             mCircleProgressBar.progress = progress
-            mCircleProgressBarShadowHide.progress = progress
+//            mCircleProgressBarShadowHide.progress = progress
             imageViewNeedle.rotation = (2.19166667 * progress).toFloat()
-            textViewCurrentDbCPB.text = String.format("%d", progress)
+            textViewCurrentDbCPB.text = String.format("%.2f", progress.toFloat())
             for (i in 0..8) {
                 if (textViewCPBLabelValues[i] < progress)
                     textViewCPBLabels[i]?.setTextColor(

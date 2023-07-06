@@ -69,25 +69,29 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_centerInParent="true"
-            android:layout_margin="32dp"
-            android:rotation="-131"
 
+            android:layout_marginStart="32dp"
+
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="32dp"
+            android:rotation="-131"
             app:drawBackgroundOutsideProgress="true"
 
             app:progress_background_color="@color/colorBackground"
+
             app:progress_end_color="@color/colorTransparent"
             app:progress_shader="sweep"
             app:progress_start_color="@color/colorTransparent"
             app:progress_stroke_cap="square"
-
             app:progress_stroke_width="10dp"
-
             app:style="solid" />
 
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="0.8dp"
+            android:tint="@color/teal_700"
             android:src="@drawable/ic_gauge_keyhole_window" />
 
         <ImageView
@@ -98,7 +102,8 @@
             android:rotation="131"
             android:scaleX="0.9"
             android:scaleY="0.9"
-            android:src="@drawable/needle" />
+            android:src="@drawable/needle"
+            />
 
         <TextView
             android:id="@+id/textView0CPB"

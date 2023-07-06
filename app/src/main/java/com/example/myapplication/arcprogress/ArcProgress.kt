@@ -15,6 +15,7 @@ import com.example.myapplication.R
 import java.text.DecimalFormat
 import java.text.DecimalFormatSymbols
 import java.util.*
+import kotlin.math.cos
 
 
 class ArcProgress @JvmOverloads constructor(
@@ -324,7 +325,7 @@ class ArcProgress @JvmOverloads constructor(
         var finishedStartAngle = startAngle
         if (progress == 0f) finishedStartAngle = 0.01f
 
-        val scaleRatio = 0.9f // Tỷ lệ giảm kích thước, 0.5f tương đương 50%
+        val scaleRatio = 0.9f
         val scaledWidth = rectF.width() * scaleRatio
         val scaledHeight = rectF.height() * scaleRatio
         val scaledLeft = rectF.centerX() - scaledWidth / 2
@@ -340,17 +341,18 @@ class ArcProgress @JvmOverloads constructor(
 
         // dot
         val endX =
-            scaledRectF.centerX() + scaledRectF.width() / 2f * Math.cos(Math.toRadians((finishedStartAngle + finishedSweepAngle).toDouble())).toFloat()
+            scaledRectF.centerX() + scaledRectF.width() / 2f * cos(Math.toRadians((finishedStartAngle + finishedSweepAngle).toDouble())).toFloat()
         val endY =
             scaledRectF.centerY() + scaledRectF.height() / 2f * Math.sin(Math.toRadians((finishedStartAngle + finishedSweepAngle).toDouble())).toFloat()
         paint!!.color = thumbColor
-        paint!!.strokeWidth = thumbSize // Tỷ lệ giảm kích thước thumbSize
+        paint!!.strokeWidth = thumbSize
         canvas.drawPoint(endX, endY, paint!!)
 
         if (arcBottomHeight == 0f) {
             val radius = width / 2f
             val angle = (360 - arcAngle) / 2f
-            arcBottomHeight = radius * (1 - Math.cos(angle / 180 * Math.PI)).toFloat()
+//            arcBottomHeight = radius * (1 - Math.cos(angle / 180 * Math.PI)).toFloat()
+            arcBottomHeight = 10f
         }
         if (currentProgress < progress) {
             currentProgress++
